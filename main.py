@@ -1,7 +1,7 @@
 import streamlit as st
 from ai import fetch_gift_ideas
 
-st.title("Gifter")
+st.title("Kindred Finds: Your Personal Gift Finder")
 
 with st.form("gift-form"):
     col1, col2 = st.columns(2)
