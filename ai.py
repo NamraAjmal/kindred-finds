@@ -64,9 +64,17 @@ Remember: your goal is to make the giver feel like the most thoughtful person in
 """,
                 },
             ],
-            temperature=0.7,
+                        temperature=0.7,
             model="openai/gpt-oss-20b",
+            response_format={"type": "json_object"},
+            reasoning_effort="low",
+            max_completion_tokens=2000,
         )
-        return json.loads(response.choices[0].message.content)
+        content = (response.choices[0].message.content or "").strip()
+
+        start, end = content.find("{"), content.rfind("}")
+        if start == -1 or end == -1:
+            raise ValueError(f"Model returned no JSON. Raw reply: {content!r}")
+        return json.loads(content[start : end + 1])
     except Exception as e:
         raise RuntimeError(e)
