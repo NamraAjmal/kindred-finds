@@ -65,7 +65,7 @@ Remember: your goal is to make the giver feel like the most thoughtful person in
                 },
             ],
             temperature=0.7,
-            model="llama-3.3-70b-versatile",
+            model="openai/gpt-oss-20b",,
         )
         return json.loads(response.choices[0].message.content)
     except Exception as e:
